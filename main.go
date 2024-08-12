@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/mohrezfadaei/ipresist/config"
+	"github.com/mohrezfadaei/ipresist/internal/db"
 	"github.com/mohrezfadaei/ipresist/resource/apiv1"
 
 	"github.com/gofiber/fiber/v2"
@@ -18,6 +19,8 @@ func main() {
 	}
 
 	config.LoadConfig()
+	db.ConnectDB()
+	defer db.DB.Close()
 
 	app := fiber.New()
 
