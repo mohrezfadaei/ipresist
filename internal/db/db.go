@@ -30,4 +30,6 @@ func ConnectDB() {
 	}
 
 	log.Println("Database connection established successfully")
+
+	DB.AutoMigrate(&IP{})
 }

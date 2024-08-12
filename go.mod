@@ -6,6 +6,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.52.5
 	github.com/jinzhu/gorm v1.9.16
 	github.com/joho/godotenv v1.5.1
+	github.com/satori/go.uuid v1.2.0
 )
 
 require (
@@ -22,4 +23,5 @@ require (
 	github.com/valyala/fasthttp v1.51.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	golang.org/x/sys v0.18.0 // indirect
+	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 )
