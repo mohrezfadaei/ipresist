@@ -14,6 +14,7 @@ var (
 	DB_USER     string
 	DB_NAME     string
 	DB_PASSWORD string
+	TIMEZONE    string
 )
 
 func LoadConfig() {
@@ -40,4 +41,6 @@ func LoadConfig() {
 	DB_USER = os.Getenv("DB_USER")
 	DB_NAME = os.Getenv("DB_NAME")
 	DB_PASSWORD = os.Getenv("DB_PASSWORD")
+
+	TIMEZONE = os.Getenv("TIMEZONE")
 }
