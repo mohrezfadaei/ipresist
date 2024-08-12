@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/mohrezfadaei/ipresist/config"
+	"github.com/mohrezfadaei/ipresist/resource/apiv1"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
@@ -19,6 +20,8 @@ func main() {
 	config.LoadConfig()
 
 	app := fiber.New()
+
+	apiv1.SetupRoutes(app)
 
 	address := fmt.Sprintf("%s:%s", config.ADDRESS, config.PORT)
 	log.Printf("Starting server on %s", address)
