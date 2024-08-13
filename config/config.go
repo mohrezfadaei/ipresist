@@ -6,19 +6,20 @@ import (
 )
 
 var (
-	DEBUG           bool
-	ADDRESS         string
-	PORT            string
-	DB_HOST         string
-	DB_PORT         string
-	DB_USER         string
-	DB_NAME         string
-	DB_PASSWORD     string
-	TIMEZONE        string
-	INFLUXDB_HOST   string
-	INFLUXDB_TOKEN  string
-	INFLUXDB_ORG    string
-	INFLUXDB_BUCKET string
+	DEBUG                 bool
+	ADDRESS               string
+	PORT                  string
+	DB_HOST               string
+	DB_PORT               string
+	DB_USER               string
+	DB_NAME               string
+	DB_PASSWORD           string
+	TIMEZONE              string
+	INFLUXDB_HOST         string
+	INFLUXDB_TOKEN        string
+	INFLUXDB_ORG          string
+	INFLUXDB_BUCKET       string
+	HEALTH_CHECK_INTERVAL int
 )
 
 func LoadConfig() {
@@ -52,4 +53,11 @@ func LoadConfig() {
 	INFLUXDB_TOKEN = os.Getenv("INFLUXDB_TOKEN")
 	INFLUXDB_ORG = os.Getenv("INFLUXDB_ORG")
 	INFLUXDB_BUCKET = os.Getenv("INFLUXDB_BUCKET")
+
+	interval, err := strconv.Atoi(os.Getenv("HEALTH_CHECK_INTERVAL"))
+	if err != nil || interval <= 0 {
+		HEALTH_CHECK_INTERVAL = 300 // Default to 300 seconds
+	} else {
+		HEALTH_CHECK_INTERVAL = interval
+	}
 }
