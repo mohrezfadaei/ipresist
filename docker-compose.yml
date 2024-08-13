@@ -1,0 +1,51 @@
+services:
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ipresist
+      MYSQL_USER: ipresist
+      MYSQL_PASSWORD: password123
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - internal
+
+  influxdb:
+    image: influxdb:2-alpine
+    environment:
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=adminpassword
+      - INFLUXDB_BUCKET=ipresist
+      - INFLUXDB_ORG=myorg
+      - INFLUXDB_RETENTION=24h
+    ports:
+      - 8086:8086
+    volumes:
+      - influxdb_data:/var/lib/influxdb2
+    networks:
+      - internal
+
+  ipresist:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+      - influxdb
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
+
+volumes:
+  mysql_data:
+  influxdb_data:
